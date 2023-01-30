@@ -6,15 +6,20 @@ const number = document.querySelector("span");
 
 number.innerHTML = 0;
 
+// 오타 방지 및 유지보수성을 향상시키기 위해, string을 keep해주는 constant 생성
+const ADD = "ADD";
+const MINUS = "MINUS";
+
 // data를 modify하는 함수 (reducer, modifier) - state를 modify하는 것은 이 함수 안에서만 가능
 const countModifier = (count = 0, action) => {
   // count는 현재의 state
-  if (action.type === "ADD") {
-    return count + 1;
-  } else if (action.type === "MINUS") {
-    return count - 1;
-  } else {
-    return count;
+  switch (action.type) {
+    case ADD:
+      return count + 1;
+    case MINUS:
+      return count - 1;
+    default:
+      return count;
   }
 };
 
@@ -35,12 +40,12 @@ countStore.subscribe(onChange);
 
 const handleAdd = () => {
   // countStore에 action을 내보내기 (message 전송 / countModifier(store)와 커뮤니케이션하기)
-  countStore.dispatch({ type: "ADD" });
+  countStore.dispatch({ type: ADD });
 };
 
 const handleMinus = () => {
   // countStore에 action을 내보내기 (message 전송 / countModifier(store)와 커뮤니케이션하기)
-  countStore.dispatch({ type: "MINUS" });
+  countStore.dispatch({ type: MINUS });
 };
 
 add.addEventListener("click", handleAdd);
