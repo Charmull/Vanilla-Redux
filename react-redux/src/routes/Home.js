@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux"; // 최신 기술 (앞으로 사용 추천)
+import { actionCreators } from "../store";
 
-const Home = ({ toDos }) => {
+const Home = ({ toDos, addToDo }) => {
   const [text, setText] = useState("");
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    addToDo(text);
     setText("");
   };
 
@@ -29,5 +31,9 @@ const mapStateToProps = (state, ownProps) => {
   return { toDos: state };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return { addToDo: (text) => dispatch(actionCreators.addToDo(text)) };
+};
+
 // mapStateToProps의 return값이 component(Home)의 prop에 추가됨
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
