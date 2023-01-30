@@ -8,6 +8,7 @@ const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
 
 // 일반적으로 dispatch할 내용(action)들을 reducer 함수 위에 다음과 같이 정의
+// action creator (dispatcher를 통해, reducer에 action으로 보내짐)
 const addToDo = (text) => {
   return {
     type: ADD_TODO,
@@ -25,9 +26,11 @@ const deleteToDo = (id) => {
 const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [{ text: action.text, id: Date.now() }, ...state];
+      const newToDoObj = { text: action.text, id: Date.now() };
+      return [newToDoObj, ...state];
     case DELETE_TODO:
-      return state.filter((toDo) => toDo.id !== action.id);
+      const cleaned = state.filter((toDo) => toDo.id !== action.id);
+      return cleaned;
     default:
       return state;
   }
