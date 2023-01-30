@@ -1,5 +1,5 @@
 import { legacy_createStore as createStore } from "redux";
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
 
 // action creator
 const addToDo = createAction("ADD");
@@ -17,7 +17,8 @@ const reducer = createReducer([], {
   },
 });
 
-const store = createStore(reducer);
+// default가 추가된 store, redux developer tools(구글 확장 프로그램)를 편리하게 사용 가능
+const store = configureStore({ reducer });
 
 export const actionCreators = {
   addToDo,
