@@ -2,7 +2,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux"; // 최신 기술 (앞으로 사용 추천)
 import ToDo from "../components/ToDo";
-import { actionCreators } from "../store";
+import { actionCreators } from "../storeToolkit";
 
 const Home = ({ toDos, addToDo }) => {
   const [text, setText] = useState("");

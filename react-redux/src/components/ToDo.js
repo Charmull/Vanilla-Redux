@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { actionCreators } from "../store";
+import { actionCreators } from "../storeToolkit";
 
 const ToDo = ({ text, onBtnClick, id }) => {
   return (

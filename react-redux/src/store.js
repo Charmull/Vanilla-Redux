@@ -18,21 +18,23 @@ const deleteToDo = (id) => {
   };
 };
 
-localStorage.getItem("toDos") !== [] ? (
-  <></>
-) : (
-  localStorage.setItem("toDos", JSON.stringify([]))
-);
+// // challenge
+// localStorage.getItem("toDos") !== [] ? (
+//   <></>
+// ) : (
+//   localStorage.setItem("toDos", JSON.stringify([]))
+// );
 
-const reducer = (state = JSON.parse(localStorage.getItem("toDos")), action) => {
+// challenge : state = JSON.parse(localStorage.getItem("toDos"))
+const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD:
       const newToDoObj = { text: action.text, id: Date.now() };
-      localStorage.setItem("toDos", JSON.stringify([newToDoObj, ...state]));
+      //   localStorage.setItem("toDos", JSON.stringify([newToDoObj, ...state]));
       return [newToDoObj, ...state];
     case DELETE:
       const delToDos = state.filter((toDo) => toDo.id !== action.id);
-      localStorage.setItem("toDos", JSON.stringify(delToDos));
+      //   localStorage.setItem("toDos", JSON.stringify(delToDos));
       return delToDos;
     default:
       return state;
