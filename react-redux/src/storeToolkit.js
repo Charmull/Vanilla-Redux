@@ -1,5 +1,13 @@
 import { legacy_createStore as createStore } from "redux";
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  createAction,
+  createReducer,
+  createSlice,
+} from "@reduxjs/toolkit";
+
+/*
+// createSlice 사용 전
 
 // action creator
 const addToDo = createAction("ADD");
@@ -16,13 +24,32 @@ const reducer = createReducer([], {
     return state.filter((toDo) => toDo.id !== action.payload);
   },
 });
+*/
+
+const toDos = createSlice({
+  name: "toDosReducer",
+  initialState: [],
+  reducers: {
+    add: (state, action) => {
+      state.push({ text: action.payload, id: Date.now() });
+    },
+    remove: (state, action) => {
+      return state.filter((toDo) => toDo.id !== action.payload);
+    },
+  },
+});
 
 // default가 추가된 store, redux developer tools(구글 확장 프로그램)를 편리하게 사용 가능
-const store = configureStore({ reducer });
+const store = configureStore({ reducer: toDos.reducer });
 
+/*
+// createSlice 사용 전
 export const actionCreators = {
   addToDo,
   deleteToDo,
 };
+*/
+
+export const { add, remove } = toDos.actions;
 
 export default store;
