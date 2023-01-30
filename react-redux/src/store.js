@@ -1,5 +1,6 @@
 import { legacy_createStore as createStore } from "redux";
 
+// action
 const ADD = "ADD";
 const DELETE = "DELETE";
 
