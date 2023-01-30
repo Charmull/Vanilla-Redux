@@ -7,11 +7,11 @@ const ul = document.querySelector("ul");
 const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
 
+// state는 immutable 해야 함
 const reducer = (state = [], action) => {
-  console.log(action);
   switch (action.type) {
     case ADD_TODO:
-      return [];
+      return [...state, { text: action.text, id: Date.now() }];
     case DELETE_TODO:
       return [];
     default:
@@ -20,6 +20,8 @@ const reducer = (state = [], action) => {
 };
 
 const store = legacy_createStore(reducer);
+
+store.subscribe(() => console.log(store.getState()));
 
 const onSubmit = (e) => {
   e.preventDefault();
